@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+        <title>World War 3</title>
+        <link rel="stylesheet" href="leaflet.css">
+        <script src="leaflet.js"></script>       
+
+        <style>
+
+            html, body, #map {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .popup {
+                margin: 20px;
+                /* background-color: lightgray; */
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 13px;
+            }
+            .popuptitle {
+                margin: 20px;
+                /* background-color: lightgray; */
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            
+            .leaflet-popup-content-wrapper, .leaflet-popup.tip {
+                background-color: black
+            }
+        </style>
+
+        <meta name="viewport" content="width=device-width,
+            initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
+        
+    <body>
+        
+        <div id="map"></div>
+        </div>
+        <div id="message">
+            Welcome!!!
+        </div>
+        <script>
+
+            var customIcon = L.Icon.extend({
+                options: {
+                    iconUrl: 'https://cdn-icons-png.flaticon.com/512/2160/2160420.png',
+                    iconSize: [30, 30]
+                }
+            })
+            
+            let map = L.map("map").setView([45,50], 4);
+            // //TODO: research how to add layer controls
+            // // L.tileLayer(
+            // //     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            // //     {attribution: "&copy; OpenStreetMap"}
+            // // ).addTo(map);
+            L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+                {attribution: "&copy; OpenStreetMap"}
+            ).addTo(map);
+            
+        //testing adding an army guy
+            var armyGuy = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/11/11298.png',
+                iconSize: [15,15]
+            });
+
+            var Tank = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/99/99404.png',
+                iconSize : [15, 15]
+            });
+
+            let pnt = L.marker([59, 40], {icon: armyGuy}).bindPopup('<div class="popup">' + 'Joe' + '</div>').addTo(map);
+            let pnt2 = L.marker([30, 50], {icon: armyGuy}).bindPopup('<div class="popup">' + 'Harry' + '</div>').addTo(map);
+            let pnt3 = L.marker([30, 30], {icon: armyGuy}).bindPopup('<div class="popup">' + 'ben stevenson' + '</div>').addTo(map);
+            let tank = L.marker([25, 29], {icon: Tank}).bindPopup('<div class="popup">' + 'Big Bad Bro' + '</div>').addTo(map);
+            
+            // testing adding a circle marker
+            L.circleMarker(
+                [59, 40],
+                {
+                    radius: 15,
+                    color: "darkblue",
+                    fillColor: "orange",
+                    fillOpacity: 0.8
+                }
+            ).addTo(map);
+
+            L.circleMarker(
+                [30, 50],
+                {
+                    radius: 15,
+                    color: "darkblue",
+                    fillColor: "orange",
+                    fillOpacity: 0.8
+                }
+            ).addTo(map);
+
+            L.circleMarker(
+                [30, 30],
+                {
+                    radius: 15,
+                    color: "darkblue",
+                    fillColor: "red",
+                    fillOpacity: 0.8
+                }
+            ).addTo(map);
+
+            L.circleMarker(
+                [25, 29],
+                {
+                    radius: 15,
+                    color: "darkblue",
+                    fillColor: "red",
+                    fillOpacity: 0.8
+                }
+            ).addTo(map);
+
+            //testing adding a pdlygon
+            // let testshape = L.polygon(
+            //     [[0,0], [5,5], [5,8], [-3,1], [0,0]],
+            //     {
+            //         color: "red",
+            //         weight: 5,
+            //         fillColor: "white"
+            //     }
+            // ).addTo(map);
+
+            //testing adding a polyline
+            // let testline = L.polyline(
+            //     [[10,0], [12,5], [15,8], [20,9]],
+            //     {
+            //         color: "green",
+            //         weight: 1.5,
+            //     }
+            // ).addTo(map);
+
+        // testing loading of local geojson file
+        fetch("states.geojson")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                L.geoJSON(data, {
+                    style: {
+                        color: "green",
+                        fillOpacity: 0,
+                        weight: 0.5
+                    },
+
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.name);
+                    }
+                }).addTo(map);
+            });
+            //not using this part
+            // let url = "https://data.seattle.gov/resource/kzjm-xkqj.geojson?$limit=20"
+
+            fetch("countries.geojson")
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    L.geoJSON(data, {
+                        style: {
+                        color: "green",
+                        fillOpacity: 0,
+                        weight: 1
+                    },
+                        onEachFeature: function(feature, layer) {
+                            layer.bindPopup(
+                                '<div class="popuptitle">' +
+                                feature.properties.ADMIN +
+                                '</div>'
+                        );
+                        }
+                    }).addTo(map);
+                });
+            
+        </script>
+
+    </body>
+    
+</html>
