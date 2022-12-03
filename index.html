@@ -164,7 +164,7 @@
             //not using this part
             // let url = "https://data.seattle.gov/resource/kzjm-xkqj.geojson?$limit=20"
 
-            fetch("countries.geojson")
+            fetch("https://data.seattle.gov/resource/kzjm-xkqj.geojson?")
                 .then(function(response) {
                     return response.json();
                 })
@@ -175,13 +175,13 @@
                         fillOpacity: 0,
                         weight: 1
                     },
-                        onEachFeature: function(feature, layer) {
-                            layer.bindPopup(
-                                '<div class="popuptitle">' +
-                                feature.properties.ADMIN +
-                                '</div>'
-                        );
-                        }
+//                         onEachFeature: function(feature, layer) {
+//                             layer.bindPopup(
+//                                 '<div class="popuptitle">' +
+//                                 feature.properties.ADMIN +
+//                                 '</div>'
+//                         );
+//                         }
                     }).addTo(map);
                 });
             
