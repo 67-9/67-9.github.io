@@ -33,21 +33,14 @@
     <script type="text/javascript">
         igraph.i18n.setLanguage("chs");
         var app = new igraph.GraphNavigator(document.getElementById('graphArea'), 'LIGHT');
-        app.loadGson("WorldCup2014.json", {
+        app.loadGson("vocab-network.json", {
             "onGetNodeDescription": function (node) {
                 var description = "<p align=center>";
-                if (node.image !== undefined) {
-                    description += "<img src='" + node.image + "' width=150/><br>";
-                }
                 description += "<b>" + node.label + "</b>" + "[" + node.id + "]";
                 description += "</p>";
                 if (node.info !== undefined) {
                     description += "<p align=left>" + node.info + "</p>";
-                } else {
-                    if (node.title !== undefined)
-                        description += "<p align=left>" + node.title + "</p>";
                 }
-
                 return description;
             }
         }, function () {});
