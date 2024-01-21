@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<script type="text/javascript" src="./interactive-graph-0.1.0/interactive-graph.min.js"></script>
+<link type="text/css" rel="stylesheet" href="./interactive-graph-0.1.0/interactive-graph.min.css">
+
+<script type="text/javascript">
+    igraph.i18n.setLanguage("chs");
+    var app = new igraph.GraphNavigator(document.getElementById('graphArea'));
+    app.loadGson("honglou.json");
+</script>
 <html>
 <body>
 
