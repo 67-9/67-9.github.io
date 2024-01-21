@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -14,26 +13,24 @@
         body {
             margin: 0px;
             font-size: 14px;
-            height: 100%;
-            width: 100%;
         }
 
         #graphArea {
-            border: 5px solid lightgray;
-            height:700px;
-            width: 100%;
+            border: 1px solid lightgray;
+            height:100%;
         }
     </style>
 
 </head>
 
 <body>
-    <div id="graphArea"></div>
+    <div style="height:100%";>
+        <div id="graphArea"></div>
     </div>
     <script type="text/javascript">
         igraph.i18n.setLanguage("chs");
         var app = new igraph.GraphNavigator(document.getElementById('graphArea'), 'LIGHT');
-        app.loadGson("vocab-network.json", {
+        app.loadGson("honglou.json", {
             "onGetNodeDescription": function (node) {
                 var description = "<p align=center>";
                 description += "<b>" + node.label + "</b>" + "[" + node.id + "]";
