@@ -30,7 +30,14 @@
     <script type="text/javascript">
         igraph.i18n.setLanguage("chs");
         var app = new igraph.GraphExplorer(document.getElementById('graphArea'),'BLACK');
-        app.loadGson("vocab-network.json", {}, function () {
+        app.loadGson("vocab-network.json", {
+             "onGetNodeDescription": function (node) {
+                var description = "<p align=center>";
+                description += "<b>" + node.id + "</b>";
+                description += "</p>";
+                return description;
+            }
+        }, function () {
         });
     </script>
 </body>
