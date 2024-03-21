@@ -29,7 +29,15 @@
     </div>
     <script type="text/javascript">
         igraph.i18n.setLanguage("chs");
-        var app = new igraph.GraphExplorer(document.getElementById('graphArea'),'BLACK');
+        var app = new igraph.GraphExplorer(document.getElementById('graphArea'),'BLACK', {
+            groups: {
+           useSeqColors: false,
+           custom: {
+               character: {color:'blue'},
+               word: {color:'red'}
+           }  
+            }
+       });
         app.loadGson("vocab-network.json", {
              "onGetNodeDescription": function (node) {
                 var description = "<p align=center>";
