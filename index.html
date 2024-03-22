@@ -40,14 +40,13 @@
        });
         app.loadGson("vocab-network.json", {
              "onGetNodeDescription": function (node) {
-                var description = "<p align=center>";
+                var description = "<p align=center font-size=30>";
                 description += "<b>" + node.id + "</b>";
                 description += "</p>";
                 return description;
             }
         }, function () {
         });
-        app.togglePhysics(checked:f);
     </script>
 </body>
 
